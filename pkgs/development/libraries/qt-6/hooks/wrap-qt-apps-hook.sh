@@ -80,7 +80,7 @@ if [[ -z "${__nix_wrapQtAppsHook-}" ]]; then
         for targetDir in "${targetDirs[@]}"; do
             [ -d "$targetDir" ] || continue
 
-            find "$targetDir" ! -type d -executable -print0 | while IFS= read -r -d '' file; do
+            find "$targetDir" ! -type d ! -name "*.so" ! -name "*.dylib" -executable -print0 | while IFS= read -r -d '' file
                 if [ -f "$file" ]; then
                     echo "wrapping $file"
                     wrapQtApp "$file"
