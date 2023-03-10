@@ -278,6 +278,10 @@ crate_: lib.makeOverridable
       depsBuildBuild = [ pkgsBuildBuild.stdenv.cc ];
       nativeBuildInputs = [ rust stdenv.cc cargo jq ] ++ (crate.nativeBuildInputs or [ ]) ++ nativeBuildInputs_;
       buildInputs = lib.optionals stdenv.isDarwin [ libiconv ] ++ (crate.buildInputs or [ ]) ++ buildInputs_;
+
+      # Hack around #218712
+      dontStrip = stdenv.isDarwin;
+
       dependencies = map lib.getLib dependencies_;
       buildDependencies = map lib.getLib buildDependencies_;
 
