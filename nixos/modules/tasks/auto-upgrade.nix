@@ -187,7 +187,10 @@ in {
       description = "NixOS Upgrade";
 
       restartIfChanged = false;
-      unitConfig.X-StopOnRemoval = false;
+      unitConfig = {
+        X-OnlyManualStart = true;
+        X-StopOnRemoval = false;
+      };
 
       serviceConfig.Type = "oneshot";
 
